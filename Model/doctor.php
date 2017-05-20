@@ -1,15 +1,16 @@
 <?php
 
-    class Admin {
+    class Doctor {
         private $id;
         private $email;
         private $username;
         private $password;
         private $firstname;
         private $lastname;
+        private $amka;
 
         public function __construct($id, $username, $firstname,
-            $lastname, $email, $password) {
+            $lastname, $email, $password, $amka) {
 
             $this->setId($id);
             $this->setEmail($email);
@@ -17,6 +18,7 @@
             $this->setPassword($password);
             $this->setFirstname($firstname);
             $this->setLastname($lastname);
+            $this->setAmka($amka);
         }
 
         public function setId($id) {
@@ -43,6 +45,10 @@
             $this->lastname = $lastname;
         }
 
+        public function setAmka($amka) {
+            $this->amka = $amka;
+        }
+
         public function getId() {
             return $this->id;
         }
@@ -67,9 +73,14 @@
             return $this->password;
         }
 
+        public function getAmka() {
+            return $this->amka;
+        }
+
         public function __toString() {
             return "Username: " . $this->getUsername() . " | Password: " . $this->getPassword()
-             . " | Email: " . $this->getEmail() . " | Firstname: " . $this->getFirstname() . " | Lastname: " . $this->getLastname();
+             . " | Email: " . $this->getEmail() . " | Firstname: " . $this->getFirstname() . " | Lastname: " . $this->getLastname() .
+             " | Amka: " . $this->getAmka();
         }
 
     }
