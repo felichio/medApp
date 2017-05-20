@@ -2,10 +2,15 @@
 
     require("admin.php");
     require("doctor.php");
+    require("patient.php");
 
     $admin = new Admin(1, "felichio", "felix", "saf", "example@example.com", "asdasf");
     $doc = new Doctor(1, "felichio", "felix", "saf", "example@example.com", "asdasf", "892345784235");
-    echo $admin . "<br>\n" . $doc;
+    $pat = new Patient(2, "atom", "patata", "1231141", "22-3-2011");
+
+
+
+    echo $admin . "<br>\n" . $doc . "<br>\n" . $pat;
 
 
  ?>
