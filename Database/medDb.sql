@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 16, 2017 at 10:51 PM
+-- Generation Time: May 20, 2017 at 03:16 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -59,7 +59,8 @@ CREATE TABLE `Doctor` (
   `firstname` varchar(30) NOT NULL,
   `lastname` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `amka` char(11) NOT NULL
+  `amka` char(11) NOT NULL,
+  `password` char(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -85,7 +86,7 @@ CREATE TABLE `Patient` (
   `firstname` varchar(30) NOT NULL,
   `lastname` varchar(30) NOT NULL,
   `amka` char(11) NOT NULL,
-  `age` int(11) NOT NULL
+  `dateOfBirth` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -155,8 +156,7 @@ ALTER TABLE `Patient`
 --
 ALTER TABLE `Prescription`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `clienteleId` (`clienteleId`),
-  ADD UNIQUE KEY `clienteleId_2` (`clienteleId`);
+  ADD KEY `clienteleId` (`clienteleId`);
 
 --
 -- Indexes for table `Therapy`
