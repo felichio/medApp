@@ -11,3 +11,11 @@
     font-size: 16px;
     color: #97de29;
 }
+
+.form-input {
+    padding-top: 50px;
+}
+
+legend {
+    text-align: center;
+}
