@@ -21,8 +21,8 @@
         $res = $stmt->get_result();
 
         if ($row = $res->fetch_assoc()) {
-            return $table = "Admin" ? new Admin($row["id"], $row["username"], $row["firstname"], $row["lastname"], $row["email"], $row["password"]) :
-                                      new Doctor();
+            return $table == "Admin" ? new Admin($row["id"], $row["username"], $row["firstname"], $row["lastname"], $row["email"], $row["password"]) :
+                                      new Doctor($row["id"], $row["username"], $row["firstname"], $row["lastname"], $row["email"], $row["password"], $row["amka"]);
         }
 
     }
