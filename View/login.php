@@ -22,6 +22,6 @@
         $_SESSION["user"] = $doctor;
     }
 
-    header("Location: " . "http://" . $_SERVER["HTTP_HOST"] . "/medWorld/View/index.php");
+    redirect("View/index.php");
 
  ?>
