@@ -10,6 +10,7 @@
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/header.css" type="text/css">
         <link rel="stylesheet" href="css/<?= $cssName ?>.css" type="text/css">
 
@@ -20,7 +21,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.php">MedWorld</a>
+                    <a class="navbar-brand" href="index.php"><i class="fa fa-heartbeat fa-2" aria-hidden="true"></i>MedWorld</a>
                 </div>
                 <p class="navbar-text navbar-right" id="form-control-label">
                     <?php
