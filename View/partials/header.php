@@ -23,6 +23,10 @@
                     <a class="navbar-brand" href="index.php">MedWorld</a>
                 </div>
                 <p class="navbar-text navbar-right" id="form-control-label">
+                    <?php
+                        
+
+                     ?>
                     <a href="" id="signin">Sign-In</a>
                     <a href="" id="register">Register</a>
                 </p>

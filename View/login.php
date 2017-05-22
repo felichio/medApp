@@ -1,9 +1,10 @@
 <?php
 
+    require_once("functions/functions.php");
 
     session_start();
 
-    require_once("functions/functions.php");
+
 
     $username = $_POST["username"];
     $password = $_POST["password"];
