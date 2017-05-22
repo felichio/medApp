@@ -33,6 +33,14 @@
         return false;
     }
 
+    function getLoggedUser() {
+        return $_SESSION["user"];
+    }
+
+    function redirect($url) {
+        header("Location: " . "http://" . $_SERVER["HTTP_HOST"] . "/medWorld/" . $url);
+    }
+
     function render($url, $data) {
 
         extract($data);
