@@ -24,11 +24,19 @@
                 </div>
                 <p class="navbar-text navbar-right" id="form-control-label">
                     <?php
-                        
+                        if(isAuthenticated()) {
+                            $user = $_SESSION["user"];
+                        ?>
+                            Signed-In as: <a href=""><?= $user->getUsername() ?></a>
+                            <a href="logout.php">Sing Out</a>
+                    <?php      } else {  ?>
 
-                     ?>
-                    <a href="" id="signin">Sign-In</a>
-                    <a href="" id="register">Register</a>
+                        <a href="" id="signin">Sign-In</a>
+                        <a href="" id="register">Register</a>
+                    <?php
+                        }
+                        ?>
+
                 </p>
             </div>
 

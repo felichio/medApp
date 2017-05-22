@@ -1,5 +1,11 @@
-        <script src="js/<?= $jsName ?>.js"></script>
 
+        <?php
+            if (isset($jsName)) {
+
+         ?>
+                <script src="js/<?= $jsName ?>.js"></script>
+
+        <?php } ?>
 
     </body>
 
