@@ -14,6 +14,23 @@
             Total number of Drugs registered: <span class="stats-num">0</span><br>
         </fieldset>
     </div>
+    <hr>
+    <div class="error">
+
+        <?php
+            if (isset($_SESSION["errors"])) {
+                $errors = $_SESSION["errors"];
+
+                array_walk($errors, function ($key, $val) {
+        ?>
+                    <div class="alert alert-danger text-center" role="alert"><?= $key ?></div>
+        <?php
+                });
+
+                unset($_SESSION["errors"]);
+        }
+        ?>
+    </div>
 
     <div class="form-input">
     </div>
