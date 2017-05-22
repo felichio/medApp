@@ -28,6 +28,10 @@
     }
 
 
+    function isAuthenticated() {
+        if (isset($_SESSION["user"])) return true;
+        return false;
+    }
 
     function render($url, $data) {
 
