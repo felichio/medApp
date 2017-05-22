@@ -25,7 +25,7 @@
                 <p class="navbar-text navbar-right" id="form-control-label">
                     <?php
                         if(isAuthenticated()) {
-                            $user = $_SESSION["user"];
+                            $user = getLoggedUser();
                         ?>
                             Signed-In as: <a href=""><?= $user->getUsername() ?></a>
                             <a href="logout.php">Sing Out</a>
