@@ -13,13 +13,9 @@
         $user = $_SESSION["user"];
 
         if ($user instanceof Admin) {
-            $title = "Admin";
-            $cssName = "admin";
-            render("views/admin_page.php", ["title" => $title, "cssName" => $cssName]);
+            redirect("View/admin.php");
         } else {
-            $title = "Doctor";
-            $cssName = "doctor";
-            render("views/doctor_page.php", ["title" => $title, "cssName" => $cssName]);
+            redirect("View/doctor.php");
         }
 
     }
