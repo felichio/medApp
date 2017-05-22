@@ -27,6 +27,21 @@
 
     }
 
+    function getNumberOf($table) {
+        global $mysqli;
+
+        $query = "select count(*) as num from $table";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($row = $res->fetch_assoc()) {
+            return $row["num"];
+        }
+
+        return 0;
+    }
+
 
     function isAuthenticated() {
         if (isset($_SESSION["user"])) return true;

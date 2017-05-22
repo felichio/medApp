@@ -8,10 +8,10 @@
     <div class="stats">
         <fieldset>
             <legend>Statistics</legend>
-            Total number of Doctors registered: <span class="stats-num">0</span><br>
-            Total number of Patients treated: <span class="stats-num">0</span><br>
-            Total number of Prescriptions issued: <span class="stats-num">0</span><br>
-            Total number of Drugs registered: <span class="stats-num">0</span><br>
+            Total number of Doctors registered: <span class="stats-num"><?= getNumberOf("Doctor") ?></span><br>
+            Total number of Patients treated: <span class="stats-num"><?= getNumberOf("Patient") ?></span><br>
+            Total number of Prescriptions issued: <span class="stats-num"><?= getNumberOf("Prescription") ?></span><br>
+            Total number of Drugs registered: <span class="stats-num"><?= getNumberOf("Drug") ?></span><br>
         </fieldset>
     </div>
     <hr>
