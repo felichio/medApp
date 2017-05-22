@@ -1,10 +1,10 @@
 <?php
 
-    require_once(__DIR__ . "/../../Model/admin.php");
-    require_once(__DIR__ . "/../../Model/doctor.php");
-    require_once(__DIR__ . "/../../Model/drug.php");
-    require_once(__DIR__ . "/../../Model/patient.php");
-    require_once(__DIR__ . "/connection.php");
+    require_once(dirname(__DIR__) . "/../Model/admin.php");
+    require_once(dirname(__DIR__) . "/../Model/doctor.php");
+    require_once(dirname(__DIR__) . "/../Model/drug.php");
+    require_once(dirname(__DIR__) . "/../Model/patient.php");
+    require_once(dirname(__DIR__) . "/functions/connection.php");
 
 
 
@@ -33,7 +33,9 @@
 
         extract($data);
 
+        include(dirname(__DIR__) . "/partials/header.php");
         include($url);
+        include(dirname(__DIR__) . "/partials/footer.php");
 
     }
 
