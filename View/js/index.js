@@ -7,6 +7,8 @@
 
     $("#form-control-label").on("click", "a", function (ev) {
 
+        $(".error").hide();
+
         let id = $(this).attr("id");
 
         $.get("forms/" + id + ".html")
@@ -14,5 +16,8 @@
 
         return false;
     });
+
+
+
 
 })();
