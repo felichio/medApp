@@ -1,4 +1,4 @@
-        <script src="js/index.js"></script>
+        <script src="js/<?= $jsName ?>.js"></script>
 
 
     </body>
