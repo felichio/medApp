@@ -36,10 +36,69 @@
         $res = $stmt->get_result();
 
         if ($row = $res->fetch_assoc()) {
-            return $row["num"];
+            return (int) $row["num"];
         }
 
         return 0;
+    }
+
+    function checkUsername($username) {
+        global $mysqli;
+
+        $f = function ($table) use ($mysqli, $username){
+            $query = "select count(*) as num from $table where username = ?";
+            $stmt = $mysqli->prepare($query);
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $res = $stmt->get_result();
+
+            if ($row = $res->fetch_assoc()) {
+                return (int) $row["num"];
+            }
+            return 0;
+        };
+
+
+        return ($f("Admin") + $f("Doctor")) > 0 ? false : true;
+
+    }
+
+    function checkAmka($amka) {
+        global $mysqli;
+
+        $f = function ($table) use ($mysqli, $amka){
+            $query = "select count(*) as num from $table where amka = ?";
+            $stmt = $mysqli->prepare($query);
+            $stmt->bind_param("s", $amka);
+            $stmt->execute();
+            $res = $stmt->get_result();
+
+            if ($row = $res->fetch_assoc()) {
+                return (int) $row["num"];
+            }
+            return 0;
+        };
+
+        return ($f("Doctor") + $f("Patient")) > 0 ? false : true;
+    }
+
+    function checkEmail($email) {
+        global $mysqli;
+
+        $f = function ($table) use ($mysqli, $email){
+            $query = "select count(*) as num from $table where email = ?";
+            $stmt = $mysqli->prepare($query);
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $res = $stmt->get_result();
+
+            if ($row = $res->fetch_assoc()) {
+                return (int) $row["num"];
+            }
+            return 0;
+        };
+
+        return ($f("Admin") + $f("Doctor")) > 0 ? false : true;
     }
 
 
@@ -64,6 +123,14 @@
         include($url);
         include(dirname(__DIR__) . "/partials/footer.php");
 
+    }
+
+
+    function filterInput($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 
 
