@@ -7,7 +7,8 @@
     if (isAuthenticated() && getLoggedUser() instanceof Admin) {
         $title = "Admin";
         $cssName = "admin";
-        render("views/admin_landing.php", ["title" => $title, "cssName" => $cssName]);
+        $jsName = "admin";
+        render("views/admin_landing.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName]);
     } else {
         redirect("View/index.php");
     }
