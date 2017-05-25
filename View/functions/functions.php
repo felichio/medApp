@@ -101,6 +101,22 @@
         return ($f("Admin") + $f("Doctor")) > 0 ? false : true;
     }
 
+    function getDoctors() {
+        $doctors = [];
+
+        global $mysqli;
+        $query = "select * from Doctor";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($row = $res->fetch_assoc()) {
+            $doctors[] = new Doctor($row["id"], $row["username"], $row["firstname"], $row["lastname"], $row["email"], $row["password"], $row["amka"]);
+        }
+
+        return $doctors;
+    }
+
 
     function isAuthenticated() {
         if (isset($_SESSION["user"])) return true;
