@@ -1,0 +1,11 @@
+.jumbotron {
+    background-color: #a29881;
+}
+
+.nav>li>a:hover {
+    background-color: #a29881;
+}
+
+.table-responsive {
+    max-height: 400px;
+}
