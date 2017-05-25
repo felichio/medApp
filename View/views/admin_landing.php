@@ -31,7 +31,7 @@
                 <?php
                     $doctors = getDoctors();
                     array_walk($doctors, function ($doctor, $key) {
-                        echo "<th>" . $key++ ."</th>";
+                        echo "<th>" . ++$key ."</th>";
                         echo "<td>" . $doctor->getFirstname() ."</td>";
                         echo "<td>" . $doctor->getLastname() ."</td>";
                         echo "<td>" . $doctor->getAmka() ."</td>";
