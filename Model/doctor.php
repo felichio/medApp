@@ -34,7 +34,7 @@
         }
 
         public function setPassword($password) {
-            $this->password = sha1($password);
+            $this->password = $password;
         }
 
         public function setFirstname($firstname) {
