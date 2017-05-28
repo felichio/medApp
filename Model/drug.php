@@ -3,13 +3,13 @@
     class Drug {
         private $code;
         private $name;
-        private $dateOfIssue;
+        private $dosage;
 
 
-        public function __construct($code, $name, $dateOfIssue) {
+        public function __construct($code, $name, $dosage) {
             $this->setCode($code);
             $this->setName($name);
-            $this->setDateOfIssue($dateOfIssue);
+            $this->setDosage($dosage);
         }
 
         public function setCode($code) {
@@ -20,8 +20,8 @@
             $this->name = $name;
         }
 
-        public function setDateOfIssue($dateOfIssue) {
-            $this->dateOfIssue = $dateOfIssue;
+        public function setDosage($dosage) {
+            $this->dosage = $dosage;
         }
 
         public function getCode() {
@@ -32,13 +32,13 @@
             return $this->name;
         }
 
-        public function getDateOfIssue() {
-            return $this->dateOfIssue;
+        public function getDosage() {
+            return $this->dosage;
         }
 
 
         public function __toString() {
-            return "Code: " . $this->getCode() . " | Name: " . $this->getName() . " DOI : " . $this->getDateOfIssue();
+            return "Code: " . $this->getCode() . " | Name: " . $this->getName() . " Dosage : " . $this->getDosage();
         }
 
     }

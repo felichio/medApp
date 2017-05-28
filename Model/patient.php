@@ -13,7 +13,7 @@
             $this->setId($id);
             $this->setFirstname($firstname);
             $this->setLastname($lastname);
-            $this->setAmka($username);
+            $this->setAmka($amka);
             $this->setDateOfBirth($dateOfBirth);
         }
 
