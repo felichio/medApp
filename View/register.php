@@ -39,10 +39,10 @@
         if (strlen($lastname) < 2) {
             $errors[] = "Lastname must be at least 2 characters";
         }
-        if (!preg_match("/^\d{11}/$", $amka)) {
+        if (!preg_match("/^\d{11}$/", $amka)) {
             $errors[] = "AMKA must be 11 digits";
         }
-        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Invalid email";
         }
         if (strlen($password1) < 5) {
@@ -57,19 +57,15 @@
             redirect("View/index.php");
         } else {
 
-            // todo insertDoctor
-            // add to session var
 
+            $doctor = new Doctor("", $username, $firstname, $lastname, $email, $password1, $amka);
+            if (registerDoctor($doctor)) {
+                $doctor = getUserFromDb($username, $password1, "Doctor");
+                $_SESSION["user"] = $doctor;
+            }
+            redirect("View/index.php");
         }
 
-
-
-
     }
-
-
-
-
-
 
 ?>
