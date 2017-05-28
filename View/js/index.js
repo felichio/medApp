@@ -43,7 +43,6 @@
         checkAmka(params[3]["value"]) ? errors.push(params[3]["key"] + " must be exactly 11 digits") : undefined;
         checkEmail(params[4]["value"]) ? errors.push(params[4]["key"] + " is invalid"): undefined;
         lessThan(5)(params[5]["value"].length) ? errors.push(err(params[5]["key"], 5)) : undefined;
-        lessThan(5)(params[6]["value"].length) ? errors.push(err(params[6]["key"], 5)) : undefined;
         notEqualsWith(params[5]["value"])(params[6]["value"]) ? errors.push("Password mismatch") : undefined;
 
         errors.map(x => console.log(x));
@@ -54,7 +53,7 @@
                 `<div class='alert alert-danger text-center' role='alert'>${error}</div>`
             );
         });
-        
+
 
 
         return errors.length === 0 ? true : false;
