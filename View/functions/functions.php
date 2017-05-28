@@ -27,6 +27,17 @@
 
     }
 
+    function registerDoctor($doctor) {
+        global $mysqli;
+
+        $query = "insert into Doctor (id, username, firstname, lastname, email, amka, password) values (NULL, ?, ?, ?, ?, ?, SHA1(?))";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("ssssss", $doctor->getUsername(), $doctor->getFirstname(), $doctor->getLastname(), $doctor->getEmail(), $doctor->getAmka(), $doctor->getPassword());
+
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
     function getNumberOf($table) {
         global $mysqli;
 
