@@ -152,7 +152,7 @@
         $stmt->execute();
         $res = $stmt->get_result();
         while ($row = $res->fetch_assoc()) {
-            $drugs[] = new Drug($row["code"], $row["name"], $row["dosage"]);
+            $drugs[] = new Drug($row["code"], $row["name"], $row["dosage"], $row["price"]);
         }
 
         return $drugs;
@@ -177,14 +177,14 @@
         $drugs = [];
         global $mysqli;
 
-        $query = "select d.code, d.name, d.dosage from Prescription pr, Therapy t, Drug d where pr.id = t.prescriptionId and t.drugCode = d.code and pr.id = ?";
+        $query = "select d.code, d.name, d.dosage, d.price from Prescription pr, Therapy t, Drug d where pr.id = t.prescriptionId and t.drugCode = d.code and pr.id = ?";
         $stmt = $mysqli->prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $res = $stmt->get_result();
 
         while ($row = $res->fetch_assoc()) {
-            $drugs[] = new Drug($row["code"], $row["name"], $row["dosage"]);
+            $drugs[] = new Drug($row["code"], $row["name"], $row["dosage"], $row["price"]);
         }
 
         return $drugs;

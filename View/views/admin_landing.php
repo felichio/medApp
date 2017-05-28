@@ -116,6 +116,7 @@
                     <th>Code</th>
                     <th>Name</th>
                     <th>Dosage</th>
+                    <th>Price</th>
                 </tr>
             </thead>
 
@@ -128,6 +129,7 @@
                         echo "<td>" . $drug->getCode() ."</td>";
                         echo "<td>" . $drug->getName() ."</td>";
                         echo "<td>" . $drug->getDosage() ."</td>";
+                        echo "<td>" . $drug->getPrice() ."$</td>";
                         echo "</tr>";
                     });
                  ?>
@@ -151,7 +153,7 @@
               <div class="form-group">
                 <label for="drug-code" class="col-sm-2 col-sm-offset-2 control-label">Drug Code</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" id="drug-code" placeholder="Code" name="drug-code">
+                  <input type="text" class="form-control" id="drug-code" placeholder="Code" name="drug-code" list="drugs">
                 </div>
               </div>
               <div class="form-group">
@@ -161,10 +163,16 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-10">
+                <div class="col-sm-offset-4 col-sm-4">
                   <button type="submit" class="btn btn-default">Search</button>
                 </div>
+                <div class="col-sm-4 checkbox">
+                    <label>
+                      <input type="checkbox"> Strict
+                    </label>
+                </div>
               </div>
+
           </form>
       </div>
       <datalist id="doctors">
@@ -179,6 +187,14 @@
           <?php
                 array_walk($patients, function ($patient, $key) {
                     echo "<option value=" . "'" . $patient->getAmka() . "'>";
+                });
+           ?>
+      </datalist>
+
+      <datalist id="drugs">
+          <?php
+                array_walk($drugs, function ($drug, $key) {
+                    echo "<option value=" . "'" . $drug->getCode() . "'>";
                 });
            ?>
       </datalist>
