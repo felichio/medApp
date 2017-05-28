@@ -31,6 +31,7 @@
                 <?php
                     $doctors = getDoctors();
                     array_walk($doctors, function ($doctor, $key) {
+                        echo "<tr>";
                         echo "<th>" . ++$key ."</th>";
                         echo "<td>" . $doctor->getFirstname() ."</td>";
                         echo "<td>" . $doctor->getLastname() ."</td>";
@@ -38,6 +39,7 @@
                         echo "<td>" . $doctor->getUsername() ."</td>";
                         echo "<td>" . $doctor->getEmail() ."</td>";
                         echo "<td>" . $doctor->getPassword() ."</td>";
+                        echo "</tr>";
                     });
                 ?>
 
@@ -57,9 +59,18 @@
             </thead>
 
             <tbody>
-                <tr>
-
-                </tr>
+                <?php
+                    $patients = getPatients();
+                    array_walk($patients, function ($patient, $key) {
+                        echo "<tr>";
+                        echo "<th>" . ++$key ."</th>";
+                        echo "<td>" . $patient->getFirstname() ."</td>";
+                        echo "<td>" . $patient->getLastname() ."</td>";
+                        echo "<td>" . $patient->getAmka() ."</td>";
+                        echo "<td>" . $patient->getDateOfBirth() ."</td>";
+                        echo "</tr>";
+                    });
+                 ?>
             </tbody>
         </table>
     </div>
@@ -76,9 +87,24 @@
             </thead>
 
             <tbody>
-                <tr>
+                <?php
+                    $prescriptions = getPrescriptions();
+                    array_walk($prescriptions, function ($prescription, $key) {
+                        echo "<tr>";
+                        echo "<th>" . ++$key ."</th>";
+                        echo "<td>" . $prescription["dname"] ."</td>";
+                        echo "<td>" . $prescription["pname"] ."</td>";
+                        echo "<td>";
+                            $drugs = getDrugsByPrescriptionId($prescription["id"]);
+                            array_walk($drugs, function ($drug, $key) {
+                                echo $drug->getName() . " (". $drug->getCode() .")<br>";
+                            });
+                        echo "</td>";
+                        echo "<td>" . $prescription["date"] ."</td>";
+                        echo "</tr>";
+                    });
 
-                </tr>
+                 ?>
             </tbody>
         </table>
     </div>
@@ -94,48 +120,65 @@
             </thead>
 
             <tbody>
-                <tr>
-
-                </tr>
+                <?php
+                    $drugs = getDrugs();
+                    array_walk($drugs, function ($drug, $key) {
+                        echo "<tr>";
+                        echo "<th>" . ++$key ."</th>";
+                        echo "<td>" . $drug->getCode() ."</td>";
+                        echo "<td>" . $drug->getName() ."</td>";
+                        echo "<td>" . $drug->getDosage() ."</td>";
+                        echo "</tr>";
+                    });
+                 ?>
             </tbody>
         </table>
     </div>
-    <form class="form-horizontal search-form" action="" method="POST">
-          <div class="form-group">
-            <label for="doctor-in" class="col-sm-2 col-sm-offset-2 control-label">Doctor's AMKA</label>
-            <div class="col-sm-5">
-              <input type="text" class="form-control" id="doctor-in" placeholder="AMKA" name="doctor-in" list="doctors">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="patient-in" class="col-sm-2 col-sm-offset-2 control-label">Patient's AMKA</label>
-            <div class="col-sm-5">
-              <input type="password" class="form-control" id="patient-in" placeholder="AMKA" name="patient-in">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="drug-code" class="col-sm-2 col-sm-offset-2 control-label">Drug Code</label>
-            <div class="col-sm-5">
-              <input type="password" class="form-control" id="drug-code" placeholder="Code" name="drug-code">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="date-in" class="col-sm-2 col-sm-offset-2 control-label">Date Of Issue</label>
-            <div class="col-sm-5">
-              <input type="password" class="form-control" id="date-in" placeholder="Date" name="date-in">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-10">
-              <button type="submit" class="btn btn-default">Search</button>
-            </div>
-          </div>
-      </form>
-
+    <div>
+        <form class="form-horizontal search-form" action="" method="POST">
+              <div class="form-group">
+                <label for="doctor-in" class="col-sm-2 col-sm-offset-2 control-label">Doctor's AMKA</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" id="doctor-in" placeholder="AMKA" name="doctor-in" list="doctors">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="patient-in" class="col-sm-2 col-sm-offset-2 control-label">Patient's AMKA</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" id="patient-in" placeholder="AMKA" name="patient-in" list="patients">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="drug-code" class="col-sm-2 col-sm-offset-2 control-label">Drug Code</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" id="drug-code" placeholder="Code" name="drug-code">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="date-in" class="col-sm-2 col-sm-offset-2 control-label">Date Of Issue</label>
+                <div class="col-sm-5">
+                  <input type="date" class="form-control" id="date-in" placeholder="Date" name="date-in">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-10">
+                  <button type="submit" class="btn btn-default">Search</button>
+                </div>
+              </div>
+          </form>
+      </div>
       <datalist id="doctors">
           <?php
                 array_walk($doctors, function ($doctor, $key) {
-                    echo "<option value=" . "'" . $doctor->getAmka() . "'";
+                    echo "<option value=" . "'" . $doctor->getAmka() . "'>";
+                });
+           ?>
+      </datalist>
+
+      <datalist id="patients">
+          <?php
+                array_walk($patients, function ($patient, $key) {
+                    echo "<option value=" . "'" . $patient->getAmka() . "'>";
                 });
            ?>
       </datalist>
