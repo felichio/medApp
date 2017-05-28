@@ -4,11 +4,11 @@
 
     session_start();
 
-    if (isAuthenticated() && getLoggedUser() instanceof Admin) {
+    if (isAuthenticated() && (getLoggedUser() instanceof Admin)) {
         $title = "Admin";
         $cssName = "admin";
         $jsName = "admin";
-        render("views/admin_landing.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName]);
+        render("views/admin/admin_landing.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName]);
     } else {
         redirect("View/index.php");
     }

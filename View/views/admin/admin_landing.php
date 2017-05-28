@@ -16,6 +16,7 @@
     <div class="table-responsive">
         <table class="table table-hover doctors-table">
             <thead>
+
                 <tr>
                     <th>#</th>
                     <th>First Name</th>
@@ -24,7 +25,9 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Password</th>
+                    <th>Settings</th>
                 </tr>
+
             </thead>
 
             <tbody>
@@ -39,6 +42,7 @@
                         echo "<td>" . $doctor->getUsername() ."</td>";
                         echo "<td>" . $doctor->getEmail() ."</td>";
                         echo "<td>" . $doctor->getPassword() ."</td>";
+                        echo "<td><a href='adminonfire.php?doctor_edt=" . $doctor->getId() . "'><i class='fa fa-cogs'></i></a><a href='adminonfire.php?doctor_del=". $doctor->getId() ."'><i class='fa fa-ban'></i></a></td>";
                         echo "</tr>";
                     });
                 ?>

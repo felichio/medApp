@@ -190,6 +190,31 @@
         return $drugs;
     }
 
+    function getDoctorById($id) {
+        global $mysqli;
+
+        $query = "select * from Doctor where id = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($row = $res->fetch_assoc()) {
+            return new Doctor($row["id"], $row["username"], $row["firstname"], $row["lastname"], $row["email"], $row["password"], $row["amka"]);
+        }
+    }
+
+    function updateDoctorById($doctor) {
+        global $mysqli;
+
+        $query = "update Doctor set username = ?, firstname = ?, lastname = ? email = ?, amka = ? where id = ? ";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("sssssi", $doctor->getUsername(), $doctor->getFirstname(), $doctor->getLastname(), $doctor->getEmail(), $doctor->getAmka(), $doctor->getId());
+
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
 
 
     function isAuthenticated() {
