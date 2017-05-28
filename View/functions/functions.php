@@ -110,12 +110,75 @@
         $stmt->execute();
         $res = $stmt->get_result();
 
-        if ($row = $res->fetch_assoc()) {
+        while ($row = $res->fetch_assoc()) {
             $doctors[] = new Doctor($row["id"], $row["username"], $row["firstname"], $row["lastname"], $row["email"], $row["password"], $row["amka"]);
         }
 
         return $doctors;
     }
+
+    function getPatients() {
+        $patients = [];
+        global $mysqli;
+
+        $query = "select * from Patient";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $patients[] = new Patient($row["id"], $row["firstname"], $row["lastname"], $row["amka"], $row["dateOfBirth"]);
+        }
+
+        return $patients;
+    }
+
+    function getDrugs() {
+        $drugs = [];
+        global $mysqli;
+
+        $query = "select * from Drug";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $drugs[] = new Drug($row["code"], $row["name"], $row["dosage"]);
+        }
+
+        return $drugs;
+    }
+
+    function getPrescriptions() {
+        $prescriptions = [];
+        global $mysqli;
+
+        $query = "select pr.id as id, d.lastname as dlastname, left(d.firstname, 1) as dfirstname, p.lastname as plastname, left(p.firstname, 1) as pfirstname, pr.dateOfIssue from Doctor d, Patient p, Clientele c, Prescription pr where pr.clienteleId = c.id and c.doctorId = d.id and c.patientId = p.id";
+        $stmt = $mysqli->prepare($query);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $prescriptions[] = ["id" => $row["id"],"dname" => $row["dlastname"] . " " . $row["dfirstname"] . ".", "pname" => $row["plastname"] . " " . $row["pfirstname"] . ".", "date" => $row["dateOfIssue"]];
+        }
+
+        return $prescriptions;
+    }
+
+    function getDrugsByPrescriptionId($id) {
+        $drugs = [];
+        global $mysqli;
+
+        $query = "select d.code, d.name, d.dosage from Prescription pr, Therapy t, Drug d where pr.id = t.prescriptionId and t.drugCode = d.code and pr.id = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        while ($row = $res->fetch_assoc()) {
+            $drugs[] = new Drug($row["code"], $row["name"], $row["dosage"]);
+        }
+
+        return $drugs;
+    }
+
 
 
     function isAuthenticated() {
