@@ -204,15 +204,46 @@
         }
     }
 
-    function updateDoctorById($doctor) {
+    function updateDoctor($doctor, $attributes) {
         global $mysqli;
 
-        $query = "update Doctor set username = ?, firstname = ?, lastname = ? email = ?, amka = ? where id = ? ";
-        $stmt = $mysqli->prepare($query);
-        $stmt->bind_param("sssssi", $doctor->getUsername(), $doctor->getFirstname(), $doctor->getLastname(), $doctor->getEmail(), $doctor->getAmka(), $doctor->getId());
+        $query = "update Doctor set ";
+        if (count($attributes) === 0) return false;
 
+        array_walk($attributes, function ($function, $attribute) use ($doctor, &$query){
+            $query .= ("" . $attribute . " = '" . $doctor->$function() . "', ");
+        });
+        $query = preg_replace("/,\s+$/", " ", $query);
+        $query .= " where id = " . $doctor->getId();
+
+        if($res = $mysqli->query($query)) {
+            return true;
+        }
+        return false;
+
+    }
+
+    function deleteDoctorById($id) {
+        global $mysqli;
+
+        $query = "delete from Doctor where id = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
         return $stmt->affected_rows;
+    }
+
+    function getDrugByCode($code) {
+        global $mysqli;
+
+        $query = "select * from Drug where code = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("s", $code);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        if ($row = $res->fetch_assoc()) {
+            return new Drug($row["code"], $row["name"], $row["dosage"], $row["price"]);
+        }
     }
 
 
