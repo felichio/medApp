@@ -83,6 +83,29 @@
              " | Amka: " . $this->getAmka();
         }
 
+        function compare($other) {
+            if ($other instanceof Doctor) {
+                $attributes = [];
+                if ($this->getUsername() !== $other->getUsername()) {
+                    $attributes["username"] = "getUsername";
+                }
+                if ($this->getFirstname() !== $other->getFirstname()) {
+                    $attributes["firstname"] = "getFirstname";
+                }
+                if ($this->getLastname() !== $other->getLastname()) {
+                    $attributes["lastname"] = "getLastname";
+                }
+                if ($this->getEmail() !== $other->getEmail()) {
+                    $attributes["email"] = "getEmail";
+                }
+                if ($this->getAmka() !== $other->getAmka()) {
+                    $attributes["amka"] = "getAmka";
+                }
+
+                return $attributes;
+            }
+        }
+
     }
 
 
