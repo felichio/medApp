@@ -43,4 +43,6 @@
 
     pills.slice(0, 1).trigger("click");
 
+    $(".success").fadeOut(3000);
+
 })();

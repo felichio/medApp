@@ -60,7 +60,7 @@
 
 
     $("#cancelbutton").on("click", function (ev) {
-        history.go(-1);
+        window.location.href = "admin.php";
     });
 
     $("#savebutton").on("click", function (ev) {
@@ -69,6 +69,8 @@
             value: $(el).val()
         })));
     });
+
+    
 
 
 
