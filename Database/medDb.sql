@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 20, 2017 at 03:16 PM
+-- Generation Time: May 29, 2017 at 09:59 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -35,6 +35,13 @@ CREATE TABLE `Admin` (
   `password` char(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Admin`
+--
+
+INSERT INTO `Admin` (`id`, `username`, `firstname`, `lastname`, `email`, `password`) VALUES
+(1, 'felichio', 'Felix', 'Safaridis', 'fsafaridis@hotmail.com', '9c69098d379350e157eff4ad93150662007b8fb2');
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +53,13 @@ CREATE TABLE `Clientele` (
   `doctorId` int(11) NOT NULL,
   `patientId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Clientele`
+--
+
+INSERT INTO `Clientele` (`id`, `doctorId`, `patientId`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -63,6 +77,14 @@ CREATE TABLE `Doctor` (
   `password` char(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Doctor`
+--
+
+INSERT INTO `Doctor` (`id`, `username`, `firstname`, `lastname`, `email`, `amka`, `password`) VALUES
+(1, 'monster', 'John', 'StrangleLove', 'example@example.com', '12220295872', '9c69098d379350e157eff4ad93150662007b8fb2'),
+(6, 'Monty', 'Alabama', 'TEXACO', 'ex@olo.gr', '25228543222', '9c69098d379350e157eff4ad93150662007b8fb2');
+
 -- --------------------------------------------------------
 
 --
@@ -72,8 +94,18 @@ CREATE TABLE `Doctor` (
 CREATE TABLE `Drug` (
   `code` char(10) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `dosage` tinytext NOT NULL
+  `dosage` tinytext NOT NULL,
+  `price` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Drug`
+--
+
+INSERT INTO `Drug` (`code`, `name`, `dosage`, `price`) VALUES
+('3919073564', 'Clarityne', '1pill/day', '3.60'),
+('7039438769', 'Depon', '3times/week', '23.10'),
+('8474135348', 'Zonar', '3times/week', '15.30');
 
 -- --------------------------------------------------------
 
@@ -89,6 +121,14 @@ CREATE TABLE `Patient` (
   `dateOfBirth` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Patient`
+--
+
+INSERT INTO `Patient` (`id`, `firstname`, `lastname`, `amka`, `dateOfBirth`) VALUES
+(1, 'Sheep', 'Junior', '12345678901', '2017-05-10'),
+(2, 'David', 'Bilzerian', '94823147391', '2017-05-10');
+
 -- --------------------------------------------------------
 
 --
@@ -101,6 +141,13 @@ CREATE TABLE `Prescription` (
   `dateOfIssue` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Prescription`
+--
+
+INSERT INTO `Prescription` (`id`, `clienteleId`, `dateOfIssue`) VALUES
+(1, 1, '2017-05-28 15:48:49');
+
 -- --------------------------------------------------------
 
 --
@@ -111,6 +158,15 @@ CREATE TABLE `Therapy` (
   `prescriptionId` int(11) NOT NULL,
   `drugCode` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Therapy`
+--
+
+INSERT INTO `Therapy` (`prescriptionId`, `drugCode`) VALUES
+(1, '3919073564'),
+(1, '7039438769'),
+(1, '8474135348');
 
 --
 -- Indexes for dumped tables
@@ -173,22 +229,27 @@ ALTER TABLE `Therapy`
 -- AUTO_INCREMENT for table `Admin`
 --
 ALTER TABLE `Admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `Clientele`
 --
 ALTER TABLE `Clientele`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `Doctor`
 --
 ALTER TABLE `Doctor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `Patient`
+--
+ALTER TABLE `Patient`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `Prescription`
 --
 ALTER TABLE `Prescription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
