@@ -7,7 +7,7 @@
         elements.each((index, el) => $(el).hide());
     };
 
-    let panels = $("table, form");
+    let panels = $(".mypanel");
 
     hideAll(panels);
 
