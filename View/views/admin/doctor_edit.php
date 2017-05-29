@@ -57,6 +57,7 @@
                   <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="email" value="<?= $doctor->getEmail() ?>">
                 </div>
               </div>
+              <input type="hidden" name="id" value="<?= $doctor->getId() ?>">
               <!-- <div class="form-group">
                 <label for="inputPassword1" class="col-sm-2 col-sm-offset-2 control-label">Password</label>
                 <div class="col-sm-5">
@@ -72,10 +73,12 @@
               <div class="form-group">
                 <div class="col-sm-offset-4 col-sm-10">
                   <button type="submit" class="btn btn-primary" id="savebutton">Save changes</button>
-                  <button class="btn btn-warning" id="cancelbutton">Cancel</button>
+                  <button type="button" class="btn btn-warning" id="cancelbutton">Cancel</button>
                 </div>
               </div>
+
           </form>
+
     </fieldset>
 
 
