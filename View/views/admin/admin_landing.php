@@ -152,7 +152,7 @@
                 </tbody>
             </table>
         </div>
-        <button type="button" class="btn btn-info" id="druginsert">Insert a Drug</button>
+        <a href="adminonfire.php?drug_crt"><button type="button" class="btn btn-info" id="druginsert">Register a Drug</button></a>
     </div>
     <div class="mypanel">
         <div>
@@ -235,7 +235,7 @@
            ?>
       </datalist>
       <span id="selectedTab"><?= isset($_SESSION["selectedTab"]) ? $_SESSION["selectedTab"] : 1 ?></span>
-      
+
       <?php
             if (isset($_SESSION["selectedTab"])) unset($_SESSION["selectedTab"]);
        ?>

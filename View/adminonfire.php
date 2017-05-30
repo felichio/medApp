@@ -45,6 +45,14 @@
             } else {
                 redirect("View/admin.php");
             }
+        } else if (isset($_GET["drug_crt"])) {
+
+            $title = "Create Drug";
+            $cssName = "admin-drug-edit";
+            $jsName = "admin-drug-edit";
+            $_SESSION["selectedTab"] = 4;
+            render("views/admin/drug_create.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName]);
+
         } else if (isset($_GET["drug_del"])) {
             $code = $_GET["drug_del"];
             $drug = getDrugByCode($code);

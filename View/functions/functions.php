@@ -302,6 +302,17 @@
         return false;
     }
 
+    function insertDrug($drug) {
+        global $mysqli;
+
+        $query = "insert into Drug (code, name, dosage, price) values (?, ?, ?, ?)";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("ssss", $drug->getCode(), $drug->getName(), $drug->getDosage(), $drug->getPrice());
+
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
 
 
     function isAuthenticated() {

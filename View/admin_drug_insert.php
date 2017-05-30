@@ -4,7 +4,6 @@
 
     session_start();
 
-    $id = filterInput($_POST["id"]);
     $code = filterInput($_POST["code"]);
     $name = filterInput($_POST["name"]);
     $dosage = filterInput($_POST["dosage"]);
@@ -12,27 +11,18 @@
 
     $errors = [];
 
-    $drug = getDrugByCode($id);
-    $drugNew = new Drug($code, $name, $dosage, $price);
+    $drug = new Drug($code, $name, $dosage, $price);
 
-    $attributes = $drug->compare($drugNew);
-
-    if (array_key_exists("code", $attributes)) {
-        if (!checkCode($code)) {
-            $errors[] = "Invalid Code";
-        }
+    if (!checkCode($code)) {
+        $errors[] = "Invalid Code";
     }
-
-    if (array_key_exists("name", $attributes)) {
-        if (!checkName($name)) {
-            $errors[] = "Invalid Name";
-        }
+    if (!checkName($name)) {
+        $errors[] = "Invalid Name";
     }
-
 
     if (count($errors) > 0) {
         $_SESSION["errors"] = $errors;
-        redirect("View/adminonfire.php?drug_edt=$id");
+        redirect("View/adminonfire.php?drug_crt");
     } else {
         if (strlen($name) < 2) {
             $errors[] = "Username must be at least 2 characters";
@@ -46,15 +36,14 @@
 
         if (count($errors) > 0) {
             $_SESSION["errors"] = $errors;
-            redirect("View/adminonfire.php?drug_edt=$id");
+            redirect("View/adminonfire.php?drug_crt");
         } else {
-            updateDrug($drugNew, $attributes, $id);
-            $successes = ["Drug " . $drug->getName() . " updated successfully"];
+            insertDrug($drug);
+            $successes = ["Drug " . $drug->getName() . " registered successfully"];
             $_SESSION["successes"] = $successes;
             redirect("View/admin.php");
         }
     }
 
 
-
- ?>
+?>
