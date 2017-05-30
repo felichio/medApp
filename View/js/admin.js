@@ -41,7 +41,9 @@
         });
     });
 
-    pills.slice(0, 1).trigger("click");
+    let i = parseInt($("#selectedTab").html());
+
+    pills.slice(i - 1, i).trigger("click");
 
     $(".success").fadeOut(3000);
 

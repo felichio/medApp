@@ -7,22 +7,7 @@
         <h2><?= $user->getLastname(). " " . $user->getFirstname()[0] . "."?></h2>
     </div>
 
-    <div class="success">
 
-        <?php
-            if (isset($_SESSION["successes"])) {
-                $successes = $_SESSION["successes"];
-
-                array_walk($successes, function ($key, $val) {
-        ?>
-                    <div class="alert alert-success text-center" role="alert"><?= $key ?></div>
-        <?php
-                });
-
-                unset($_SESSION["successes"]);
-        }
-        ?>
-    </div>
 
     <ul class="nav nav-pills nav-justified">
         <li role="presentation"><a href="#">Doctors</a></li>
@@ -209,6 +194,23 @@
               </form>
           </div>
       </div>
+
+      <div class="success">
+
+          <?php
+              if (isset($_SESSION["successes"])) {
+                  $successes = $_SESSION["successes"];
+
+                  array_walk($successes, function ($key, $val) {
+          ?>
+                      <div class="alert alert-success text-center" role="alert"><?= $key ?></div>
+          <?php
+                  });
+
+                  unset($_SESSION["successes"]);
+          }
+          ?>
+      </div>
       <datalist id="doctors">
           <?php
                 array_walk($doctors, function ($doctor, $key) {
@@ -232,4 +234,9 @@
                 });
            ?>
       </datalist>
+      <span id="selectedTab"><?= isset($_SESSION["selectedTab"]) ? $_SESSION["selectedTab"] : 1 ?></span>
+      
+      <?php
+            if (isset($_SESSION["selectedTab"])) unset($_SESSION["selectedTab"]);
+       ?>
 </div>

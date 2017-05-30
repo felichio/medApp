@@ -246,6 +246,62 @@
         }
     }
 
+    function deleteDrugByCode($code) {
+        global $mysqli;
+
+        $query = "delete from Drug where code = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("s", $code);
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    function checkCode($code) {
+        global $mysqli;
+        $query = "select count(*) as num from Drug where code = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("s", $code);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($row = $res->fetch_assoc()) {
+            $num = $row["num"];
+        }
+        return $num > 0 ? false : true;
+    }
+
+    function checkName($name) {
+        global $mysqli;
+        $query = "select count(*) as num from Drug where name = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("s", $name);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($row = $res->fetch_assoc()) {
+            $num = $row["num"];
+        }
+        return $num > 0 ? false : true;
+    }
+
+    function updateDrug($drug, $attributes, $id) {
+        global $mysqli;
+
+        $query = "update Drug set ";
+        if (count($attributes) === 0) return false;
+
+        array_walk($attributes, function ($function, $attribute) use ($drug, &$query, $id){
+            $query .= ("" . $attribute . " = '" . $drug->$function() . "', ");
+        });
+        $query = preg_replace("/,\s+$/", " ", $query);
+        $query .= " where code = " . $id;
+
+        if($res = $mysqli->query($query)) {
+            return true;
+        }
+        return false;
+    }
+
 
 
     function isAuthenticated() {
