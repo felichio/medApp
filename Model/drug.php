@@ -50,6 +50,26 @@
             return "Code: " . $this->getCode() . " | Name: " . $this->getName() . " Dosage : " . $this->getDosage() . " Price: " . $this->getPrice();
         }
 
+        function compare($other) {
+            if ($other instanceof Drug) {
+                $attributes = [];
+                if ($this->getCode() !== $other->getCode()) {
+                    $attributes["code"] = "getCode";
+                }
+                if ($this->getName() !== $other->getName()) {
+                    $attributes["name"] = "getName";
+                }
+                if ($this->getDosage() !== $other->getDosage()) {
+                    $attributes["dosage"] = "getDosage";
+                }
+                if ($this->getPrice() !== $other->getPrice()) {
+                    $attributes["price"] = "getPrice";
+                }
+
+                return $attributes;
+            }
+        }
+
     }
 
 
