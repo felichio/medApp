@@ -129,7 +129,7 @@
                         <th>#</th>
                         <th>Code</th>
                         <th>Name</th>
-                        <th>Dosage</th>
+                        <th>Suggested Dosage</th>
                         <th>Price</th>
                         <th>Settings</th>
                     </tr>
