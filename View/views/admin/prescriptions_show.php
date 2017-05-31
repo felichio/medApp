@@ -12,7 +12,7 @@
     <?php
         array_walk($prescriptions, function ($prescription, $key) {
     ?>
-        <div class="panel panel-primary">
+        <div class="panel panel-warning">
             <div class="panel-heading">
                 <h5>Prescription #<?= $prescription["id"]?></h5>
             </div>
