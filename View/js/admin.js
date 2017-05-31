@@ -46,5 +46,23 @@
     pills.slice(i - 1, i).trigger("click");
 
     $(".success").fadeOut(3000);
+    $(".error").fadeOut(3000);
+
+    $("#searchbutton").on("click", function (ev) {
+        if ($("#strictbox").is(":checked")) {
+            console.log("here");
+            if ($("#doctor-in").val() === "" || $("#patient-in").val() === "" || $("#drug-code").val() === "" || $("#date-in").val() === "") {
+                $(".error").empty();
+
+                $(".error").append(
+                    "<div class='alert alert-danger text-center' role='alert'>Insert all the fields</div>"
+                );
+                $(".error").show();
+                $(".error").fadeOut(3000);
+                return false;
+            }
+        }
+        return true;
+    });
 
 })();

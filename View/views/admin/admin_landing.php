@@ -156,7 +156,7 @@
     </div>
     <div class="mypanel">
         <div>
-            <form class="form-horizontal search-form" action="" method="POST">
+            <form class="form-horizontal search-form" action="adminonfire.php" method="POST">
                   <div class="form-group">
                     <label for="doctor-in" class="col-sm-2 col-sm-offset-2 control-label">Doctor's AMKA</label>
                     <div class="col-sm-5">
@@ -183,11 +183,11 @@
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-4">
-                      <button type="submit" class="btn btn-info">Search</button>
+                      <button type="submit" class="btn btn-info" id="searchbutton">Search</button>
                     </div>
                     <div class="col-sm-4 checkbox">
                         <label>
-                          <input type="checkbox"> Strict
+                          <input type="checkbox" name="strict" id="strictbox"> Strict
                         </label>
                     </div>
                   </div>
@@ -208,6 +208,22 @@
                   });
 
                   unset($_SESSION["successes"]);
+          }
+          ?>
+      </div>
+      <div class="error">
+
+          <?php
+              if (isset($_SESSION["errors"])) {
+                  $errors = $_SESSION["errors"];
+
+                  array_walk($errors, function ($key, $val) {
+          ?>
+                      <div class="alert alert-warning text-center" role="alert"><?= $key ?></div>
+          <?php
+                  });
+
+                  unset($_SESSION["errors"]);
           }
           ?>
       </div>

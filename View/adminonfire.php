@@ -65,6 +65,25 @@
             }
 
             redirect("View/admin.php");
+        } else if (isset($_POST["doctor-in"]) || isset($_POST["patient-in"]) || isset($_POST["drug-code"]) || isset($_POST["date-in"])) {
+            $doctorAmka = $_POST["doctor-in"];
+            $patientAmka = $_POST["patient-in"];
+            $drugCode = $_POST["drug-code"];
+            $date = $_POST["date-in"];
+            $strict = $_POST["strict"];
+
+            $prescriptions = getPrescriptionsByParameters($doctorAmka, $patientAmka, $drugCode, $date, $strict);
+            $_SESSION["selectedTab"] = 5;
+            if (count($prescriptions) > 0 ) {
+                $title = "Show Prescriptions";
+                $cssName = "admin-search";
+                $jsName = "admin-search";
+                render("views/admin/prescriptions_show.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName, "prescriptions" => $prescriptions]);
+            } else {
+                $errors = ["No results found"];
+                $_SESSION["errors"] = $errors;
+                redirect("View/admin.php");
+            }
         }
 
 

@@ -173,6 +173,29 @@
         return $prescriptions;
     }
 
+    function getPrescriptionsByParameters($doctorAmka, $patientAmka, $drugCode, $date, $strict) {
+        $prescriptions = [];
+        global $mysqli;
+
+        if ($strict) {
+            $query = "select pr.id as id, d.lastname as dlastname, left(d.firstname, 1) as dfirstname, p.lastname as plastname, left(p.firstname, 1) as pfirstname, pr.dateOfIssue as date, dr.code as code from Doctor d, Patient p, Clientele c, Prescription pr, Therapy t, Drug dr where pr.clienteleId = c.id and c.doctorId = d.id and c.patientId = p.id and t.prescriptionId = pr.id and t.drugCode = dr.code and (d.amka = ? and p.amka = ? and dr.code = ? and ? = (select date_format(pr.dateOfIssue, '%Y-%m-%d')))";
+        } else {
+            $query = "select pr.id as id, d.lastname as dlastname, left(d.firstname, 1) as dfirstname, p.lastname as plastname, left(p.firstname, 1) as pfirstname, pr.dateOfIssue as date, dr.code as code from Doctor d, Patient p, Clientele c, Prescription pr, Therapy t, Drug dr where pr.clienteleId = c.id and c.doctorId = d.id and c.patientId = p.id and t.prescriptionId = pr.id and t.drugCode = dr.code and (d.amka = ? or p.amka = ? or dr.code = ? or ? = (select date_format(pr.dateOfIssue, '%Y-%m-%d')))";
+        }
+
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("ssss", $doctorAmka, $patientAmka, $drugCode, $date);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $prescriptions[] = ["id" => $row["id"],"dname" => $row["dlastname"] . " " . $row["dfirstname"] . ".", "pname" => $row["plastname"] . " " . $row["pfirstname"] . ".", "date" => $row["date"], "code" => $row["code"]];
+        }
+        
+
+        return $prescriptions;
+
+    }
+
     function getDrugsByPrescriptionId($id) {
         $drugs = [];
         global $mysqli;
