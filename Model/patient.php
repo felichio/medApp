@@ -61,6 +61,26 @@
             return "Firstname: " . $this->getFirstname() . " | Lastname: " . $this->getLastname() . " ID: " . $this->id . " | DOB: " . $this->getDateOfBirth();
         }
 
+        function compare($other) {
+            if ($other instanceof Patient) {
+                $attributes = [];
+                if ($this->getFirstname() !== $other->getFirstname()) {
+                    $attributes["firstname"] = "getFirstname";
+                }
+                if ($this->getLastname() !== $other->getLastname()) {
+                    $attributes["lastname"] = "getLastname";
+                }
+                if ($this->getAmka() !== $other->getAmka()) {
+                    $attributes["amka"] = "getAmka";
+                }
+                if ($this->getDateOfBirth() !== $other->getDateOfBirth()) {
+                    $attributes["dateOfBirth"] = "getDateOfBirth";
+                }
+
+                return $attributes;
+            }
+        }
+
     }
 
 

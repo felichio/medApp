@@ -93,6 +93,22 @@
         return ($f("Doctor") + $f("Patient")) > 0 ? false : true;
     }
 
+    function checkPatientsAmkaByDoctor($doctor, $amka) {
+        global $mysqli;
+        $query = "select count(*) as num from Patient p, Clientele c where c.patientId = p.id and c.doctorId =  ? and p.amka = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("is", $doctor->getId(), $amka);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        $num = 0;
+        if ($row = $res->fetch_assoc()) {
+            $num = (int) $row["num"];
+        }
+
+        return $num > 0 ? false : true;
+    }
+
     function checkEmail($email) {
         global $mysqli;
 
@@ -190,7 +206,7 @@
         while ($row = $res->fetch_assoc()) {
             $prescriptions[] = ["id" => $row["id"],"dname" => $row["dlastname"] . " " . $row["dfirstname"] . ".", "pname" => $row["plastname"] . " " . $row["pfirstname"] . ".", "date" => $row["date"], "code" => $row["code"]];
         }
-        
+
 
         return $prescriptions;
 
@@ -335,6 +351,128 @@
         $stmt->execute();
         return $stmt->affected_rows;
     }
+
+
+    function getPatientsByDoctor($doctor) {
+        global $mysqli;
+        $patients = [];
+        $query = "select p.id, p.firstname, p.lastname, p.amka, p.dateOfBirth from Patient p, Clientele c where c.patientId = p.id and c.doctorId = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $doctor->getId());
+        $stmt->execute();
+        $res = $stmt->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $patients[] = new Patient($row["id"], $row["firstname"], $row["lastname"], $row["amka"], $row["dateOfBirth"]);
+        }
+
+        return $patients;
+    }
+
+    function getNumberOfPrescriptionsByDoctorPatient($doctor, $patient) {
+        global $mysqli;
+
+        $query = "select count(*) as num from Prescription p, Clientele c where p.clienteleId = c.id and c.doctorId = ? and c.patientId = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("ii", $doctor->getId(), $patient->getId());
+        $stmt->execute();
+        $res = $stmt->get_result();
+        if ($row = $res->fetch_assoc()) {
+            return (int) $row["num"];
+        }
+
+        return 0;
+    }
+
+    function getPrescriptionsByDoctor($doctor) {
+        $prescriptions = [];
+        global $mysqli;
+
+        $query = "select pr.id as id, p.lastname as lastname, left(p.firstname, 2) as firstname, amka, dateOfBirth, dateOfIssue from Patient p, Clientele c, Prescription pr where c.patientId = p.id and pr.clienteleId = c.id and c.doctorId = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $doctor->getId());
+        $stmt->execute();
+        $res = $stmt->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $prescriptions[] = ["id" => $row["id"], "lastname" => $row["lastname"], "firstname" => $row["firstname"], "amka" => $row["amka"], "dateOfBirth" => $row["dateOfBirth"], "dateOfIssue" => $row["dateOfIssue"]];
+        }
+
+        return $prescriptions;
+    }
+
+
+    function getDrugsAndDosageByPrescriptionId($id) {
+        $drugs = [];
+        global $mysqli;
+
+        $query = "select d.code, d.name, d.dosage, d.price, t.dosage as dosage2 from Prescription pr, Therapy t, Drug d where pr.id = t.prescriptionId and t.drugCode = d.code and pr.id = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        while ($row = $res->fetch_assoc()) {
+            $drugs[] = ["drug" => new Drug($row["code"], $row["name"], $row["dosage"], $row["price"]), "dosage" => $row["dosage2"]];
+        }
+
+        return $drugs;
+    }
+
+    function getPatientById($id) {
+        global $mysqli;
+
+        $query = "select * from Patient where id = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($row = $res->fetch_assoc()) {
+            return new Patient($row["id"], $row["firstname"], $row["lastname"], $row["amka"], $row["dateOfBirth"]);
+        }
+    }
+
+    function deletePatientById($id) {
+        global $mysqli;
+
+        $query = "delete from Patient where id = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    function updatePatient($patient, $attributes) {
+        global $mysqli;
+
+        $query = "update Patient set ";
+        if (count($attributes) === 0) return false;
+
+        array_walk($attributes, function ($function, $attribute) use ($patient, &$query){
+            $query .= ("" . $attribute . " = '" . $patient->$function() . "', ");
+        });
+        $query = preg_replace("/,\s+$/", " ", $query);
+        $query .= " where id = " . $patient->getId();
+
+        if($res = $mysqli->query($query)) {
+            return true;
+        }
+        return false;
+
+    }
+
+    function insertPatientAssocWithDoctor($user, $patient) {
+        global $mysqli;
+
+
+        $query = "insert into Patient (firstname, lastname, amka, dateOfBirth) values ('" . $patient->getFirstname() . "','" . $patient->getLastname() . "','" . $patient->getAmka() . "','" . $patient->getDateOfBirth() . "');SET @last_id = LAST_INSERT_ID(); insert into Clientele (doctorId, patientId) values (" . $user->getId() . ", @last_id)";
+        
+        if($res = $mysqli->multi_query($query)) {
+            return true;
+        }
+        return false;
+    }
+
+
 
 
 
