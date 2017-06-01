@@ -464,12 +464,11 @@
         global $mysqli;
 
 
-        $query = "insert into Patient (firstname, lastname, amka, dateOfBirth) values ('" . $patient->getFirstname() . "','" . $patient->getLastname() . "','" . $patient->getAmka() . "','" . $patient->getDateOfBirth() . "');SET @last_id = LAST_INSERT_ID(); insert into Clientele (doctorId, patientId) values (" . $user->getId() . ", @last_id)";
-        
-        if($res = $mysqli->multi_query($query)) {
-            return true;
-        }
-        return false;
+        $query = "insert into Patient (firstname, lastname, amka, dateOfBirth) values ('" . $patient->getFirstname() . "','" . $patient->getLastname() . "','" . $patient->getAmka() . "','" . $patient->getDateOfBirth() . "')";
+        $mysqli->query($query);
+        $query = "insert into Clientele (doctorId, patientId) values (" . $user->getId() . ", LAST_INSERT_ID())";
+        $mysqli->query($query);
+        return true;
     }
 
 
