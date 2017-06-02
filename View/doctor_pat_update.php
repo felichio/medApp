@@ -22,7 +22,7 @@
 
     if (array_key_exists("amka", $attributes)) {
         if (!checkPatientsAmkaByDoctor($user, $amka)) {
-            $errors[] = "Invalid AMKA";
+            $errors[] = "AMKA is already registered";
         }
     }
 

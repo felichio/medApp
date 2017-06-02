@@ -1,6 +1,6 @@
 <div class="container">
     <div class="jumbotron">
-        <h1>Administrator</h1>
+        <h1>Doctor</h1>
         <?php
             $user = getLoggedUser();
 

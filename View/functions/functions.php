@@ -471,8 +471,59 @@
         return true;
     }
 
+    function getPatientAmkasByDoctor($doctor) {
+        global $mysqli;
+        $amkas = [];
 
+        $query = "select amka from Clientele c, Patient p where c.doctorId = ? and c.patientId = p.id";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $doctor->getId());
+        $stmt->execute();
+        $res = $stmt->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $amkas[] = $row["amka"];
+        }
 
+        return $amkas;
+    }
+
+    function getIdOfClienteleAssociatedWithDoctorAmka($user, $amka) {
+        global $mysqli;
+        $query = "select c.id from Clientele c, Patient p where c.patientId = p.id and c.doctorId = ? and p.amka = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("is", $user->getId(), $amka);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($row = $res->fetch_assoc()) {
+            return (int) $row["id"];
+        }
+    }
+
+    function insertPrescriptionAssociatedWithClienteleId($id) {
+        global $mysqli;
+        $query = "insert into Prescription (clienteleId) values (?)";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    function insertDrugsAssociationsIntoTherapy($code, $dosage) {
+        global $mysqli;
+        $query = "insert into Therapy (prescriptionId, drugCode, dosage) values (LAST_INSERT_ID(), \"$code\", \"$dosage\")";
+        $mysqli->query($query);
+    }
+
+    function deletePrescriptionById($id) {
+        global $mysqli;
+
+        $query = "delete from Prescription where id = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
 
 
     function isAuthenticated() {

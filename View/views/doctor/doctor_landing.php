@@ -24,7 +24,7 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>AMKA</th>
-                        <th>Number of Prescriptions Issued</th>
+                        <th># of issued Prescr.</th>
                         <th>Date Of Birth</th>
                         <th>Settings</th>
                     </tr>
@@ -61,6 +61,7 @@
                         <th>Date of Birth</th>
                         <th>Codes of Drugs/Dosage</th>
                         <th>Date Of Issue</th>
+                        <th>Settings</th>
                     </tr>
                 </thead>
 
@@ -82,6 +83,7 @@
                                 });
                             echo "</td>";
                             echo "<td>" . $prescription["dateOfIssue"] ."</td>";
+                            echo "<td class='centercolumn'><a href='doctoronfire.php?prescription_del=". $prescription["id"] ."'><i class='fa fa-ban'></i></a></td>";
                             echo "</tr>";
                         });
 
@@ -89,6 +91,7 @@
                 </tbody>
             </table>
         </div>
+        <a href="doctoronfire.php?prescription_crt"><button type="button" class="btn btn-info" id="prescriptioninsert">Register a Prescription</button></a>
     </div>
     <div class="mypanel">
         <div class="table-responsive">

@@ -19,7 +19,7 @@
 
 
     if (!checkPatientsAmkaByDoctor($user, $amka)) {
-        $errors[] = "Invalid AMKA";
+        $errors[] = "AMKA is already registered";
     }
 
 

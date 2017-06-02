@@ -25,3 +25,11 @@
 #patientinsert {
     margin-bottom: 20px;
 }
+
+#prescriptioninsert {
+    margin-bottom: 20px;
+}
+
+.centercolumn {
+    text-align: center;
+}
