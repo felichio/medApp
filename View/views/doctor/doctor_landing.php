@@ -159,7 +159,7 @@
       </div>
       <div class="mypanel">
           <div>
-              <form class="form-horizontal search-form" action="" method="POST">
+              <form class="form-horizontal search-form" action="doctoronfire.php" method="POST">
                     <div class="form-group">
                       <label for="patient-in" class="col-sm-2 col-sm-offset-2 control-label">Drug Name</label>
                       <div class="col-sm-5">

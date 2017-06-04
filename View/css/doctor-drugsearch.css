@@ -1,0 +1,12 @@
+.jumbotron {
+    background-color: #aea8b3;
+}
+
+.DrugPanel {
+    max-height: 500px;
+    overflow: auto;
+}
+
+#backbutton {
+    margin-top: 30px;
+}

@@ -547,6 +547,27 @@
         return $stmt->affected_rows;
     }
 
+    function getDrugsAssociatedWithAttributes($code, $name, $price, $strict) {
+        $drugs = [];
+        global $mysqli;
+
+        if ($strict) {
+            $query = "select * from Drug where (code = ? and name = ? and price = ?)";
+        } else {
+            $query = "select * from Drug where (code = ? or name = ? or price = ?)";
+        }
+
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("ssd", $code, $name, $price);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $drugs[] = new Drug($row["code"], $row["name"], $row["dosage"], $row["price"]);
+        }
+
+        return $drugs;
+    }
+
 
     function isAuthenticated() {
         if (isset($_SESSION["user"])) return true;
