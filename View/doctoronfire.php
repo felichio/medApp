@@ -69,14 +69,38 @@
                 $cssName = "doctor-presearch";
                 $jsName = "doctor-presearch";
                 render("views/doctor/prescriptions_show.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName, "prescriptions" => $prescriptions]);
-                
             } else {
                 $errors = ["No results found"];
                 $_SESSION["errors"] = $errors;
                 redirect("View/doctor.php");
             }
+        } else if (isset($_POST["drug-in"]) || isset($_POST["drug-code"]) || isset($_POST["price-in"])) {
+            $name = $_POST["drug-in"];
+            $code = $_POST["drug-code"];
+            $price = $_POST["price-in"];
+            $strict = $_POST["strict"];
+
+            $drugs = getDrugsAssociatedWithAttributes($code, $name, $price, $strict);
+            $_SESSION["selectedTab"] = 5;
+
+
+            if (count($drugs) > 0 ) {
+                $title = "Show Drugs";
+                $cssName = "doctor-drugsearch";
+                $jsName = "doctor-drugsearch";
+                render("views/doctor/drugs_show.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName, "drugs" => $drugs]);
+            } else {
+                $errors = ["No results found"];
+                $_SESSION["errors"] = $errors;
+                redirect("View/doctor.php");
+            }
+
+        } else {
+            redirect("View/index.php");
         }
 
+    } else {
+        redirect("View/index.php");
     }
 
 ?>

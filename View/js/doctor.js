@@ -64,4 +64,20 @@
         return true;
     });
 
+    $("#drugsearchbutton").on("click", function (ev) {
+        if ($("#drugstrictbox").is(":checked")) {
+            if ($("#drug-in").val() === "" || $("#drug-code").val() === "" || $("#price-in").val() === "") {
+                $(".error").empty();
+
+                $(".error").append(
+                    "<div class='alert alert-danger text-center' role='alert'>Insert all the fields</div>"
+                );
+                $(".error").show();
+                $(".error").fadeOut(3000);
+                return false;
+            }
+        }
+        return true;
+    });
+
 })();

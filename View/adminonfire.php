@@ -84,6 +84,8 @@
                 $_SESSION["errors"] = $errors;
                 redirect("View/admin.php");
             }
+        } else {
+            redirect("View/index.php");
         }
 
 
