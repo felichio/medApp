@@ -10,7 +10,10 @@
 
     <div class="PrescriptionPanel">
     <?php
-        array_walk($prescriptions, function ($prescription, $key) {
+        $ids = [];
+        array_walk($prescriptions, function ($prescription, $key) use (&$ids){
+            if (!in_array($prescription["id"], $ids)) {
+                $ids[] = $prescription["id"];
     ?>
         <div class="panel panel-warning">
             <div class="panel-heading">
@@ -22,7 +25,7 @@
                         <tr>
                             <th>Doctor's Name</th>
                             <th>Patient's Name</th>
-                            <th>Code of Drug</th>
+                            <th>Codes of Drugs/Dosage</th>
                             <th>Date Of Issue</th>
                         </tr>
                     </thead>
@@ -31,7 +34,15 @@
                         <tr>
                             <td><?= $prescription["dname"] ?></td>
                             <td><?= $prescription["pname"] ?></td>
-                            <td><?= $prescription["code"] ?></td>
+                            <?php
+                            echo "<td>";
+                                $drugs = getDrugsAndDosageByPrescriptionId($prescription["id"]);
+                                array_walk($drugs, function ($drug, $key) {
+                                    $dosage = $drug["dosage"] === "" ? $drug["drug"]->getDosage() : $drug["dosage"];
+                                    echo $drug["drug"]->getName() . " (". $drug["drug"]->getCode() . ", ". $dosage .")<br>";
+                                });
+                            echo "</td>";
+                             ?>
                             <td><?= $prescription["date"] ?></td>
                         </tr>
                     </tbody>
@@ -40,6 +51,7 @@
         </div>
 
     <?php
+            }
         });
     ?>
     </div>
