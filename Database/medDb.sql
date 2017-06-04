@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 29, 2017 at 09:59 PM
+-- Generation Time: Jun 04, 2017 at 07:41 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -59,7 +59,27 @@ CREATE TABLE `Clientele` (
 --
 
 INSERT INTO `Clientele` (`id`, `doctorId`, `patientId`) VALUES
-(1, 1, 1);
+(15, 1, 3),
+(16, 1, 4),
+(19, 1, 8),
+(20, 1, 9),
+(27, 1, 16),
+(37, 1, 26),
+(21, 7, 10),
+(22, 7, 11),
+(36, 7, 25),
+(23, 8, 12),
+(24, 8, 13),
+(25, 8, 14),
+(26, 8, 15),
+(28, 9, 17),
+(29, 9, 18),
+(32, 9, 21),
+(30, 10, 19),
+(31, 10, 20),
+(34, 11, 23),
+(35, 11, 24),
+(38, 12, 27);
 
 -- --------------------------------------------------------
 
@@ -83,7 +103,12 @@ CREATE TABLE `Doctor` (
 
 INSERT INTO `Doctor` (`id`, `username`, `firstname`, `lastname`, `email`, `amka`, `password`) VALUES
 (1, 'monster', 'John', 'StrangleLove', 'example@example.com', '12220295872', '9c69098d379350e157eff4ad93150662007b8fb2'),
-(6, 'Monty', 'Alabama', 'TEXACO', 'ex@olo.gr', '25228543222', '9c69098d379350e157eff4ad93150662007b8fb2');
+(7, 'Monty', 'Python', 'Snake', 'snake@gmail.com', '48328543221', '9c69098d379350e157eff4ad93150662007b8fb2'),
+(8, 'Sakis', 'Sakis', 'Kappas', 'agios@lol.com', '56198737811', '9c69098d379350e157eff4ad93150662007b8fb2'),
+(9, 'Makis', 'Makis', 'Lol', 'ex@exex.gr', '11111111113', '9c69098d379350e157eff4ad93150662007b8fb2'),
+(10, 'Travolda', 'John', 'Rambo', 'example@ee.egg', '60987103941', '9c69098d379350e157eff4ad93150662007b8fb2'),
+(11, 'Travoldaa', 'Bill', 'LOlsa', 'example@eeee.ss', '72345551631', '9c69098d379350e157eff4ad93150662007b8fb2'),
+(12, 'Dildo', 'Baggins', 'Mousar', 'example@qwerty.com', '60987104444', '9c69098d379350e157eff4ad93150662007b8fb2');
 
 -- --------------------------------------------------------
 
@@ -104,8 +129,13 @@ CREATE TABLE `Drug` (
 
 INSERT INTO `Drug` (`code`, `name`, `dosage`, `price`) VALUES
 ('3919073564', 'Clarityne', '1pill/day', '3.60'),
-('7039438769', 'Depon', '3times/week', '23.10'),
-('8474135348', 'Zonar', '3times/week', '15.30');
+('4322342343', 'Depon', '3times/week', '29.15'),
+('3919073568', 'Marko', '4times/week', '52.34'),
+('5919073567', 'Parashok', '1time/week', '95.14'),
+('4322341512', 'Polo', '1pill/day', '13.01'),
+('5919073522', 'Sea', '3times/week', '1.45'),
+('3919073514', 'Www', '3times/week', '34.63'),
+('3919073522', 'Zanax', '1pill/day', '985.15');
 
 -- --------------------------------------------------------
 
@@ -126,8 +156,27 @@ CREATE TABLE `Patient` (
 --
 
 INSERT INTO `Patient` (`id`, `firstname`, `lastname`, `amka`, `dateOfBirth`) VALUES
-(1, 'Sheep', 'Junior', '12345678901', '2017-05-10'),
-(2, 'David', 'Bilzerian', '94823147391', '2017-05-10');
+(3, 'S4', 'Voldermod', '42416578590', '2016-11-07'),
+(4, 'AMqe', 'Alonsooww', '56198737813', '2017-06-01'),
+(8, 'asd', 'asd', '12220295873', '2017-06-14'),
+(9, 'Baki', 'Alonso', '59413849301', '2017-06-14'),
+(10, 'Lavita', 'Luiza', '72345551678', '2017-06-05'),
+(11, 'Polo', 'Python', '60987103951', '2016-12-14'),
+(12, 'Montana', 'Veronica', '80976413589', '2017-05-29'),
+(13, 'Hana', 'Voitsek', '60987103954', '2017-06-07'),
+(14, 'Dragki', 'Lola', '56198737813', '2017-06-07'),
+(15, 'Abloba', 'Vatraxos', '80976413583', '2017-06-05'),
+(16, 'Dragggki', 'wonder', '11111111112', '2017-06-06'),
+(17, 'Nobody', 'Maigaiver', '11111111114', '2017-06-22'),
+(18, 'Ela', 'Mou', '56198737813', '2017-06-04'),
+(19, 'Dina', 'Bed', '60987103990', '2017-06-10'),
+(20, 'asdad', 'sdfsdf', '42416578234', '2017-06-19'),
+(21, 'sdf', 'dfgdfg', '56198737812', '2017-06-14'),
+(23, 'sdf', 'qeqweq', '42416578532', '2017-06-16'),
+(24, 'werw', 'werwer', '60987103990', '2017-06-07'),
+(25, 'Livia', 'Montana', '60987103992', '2017-06-05'),
+(26, 'Wicher', 'Hunter', '99198737819', '2017-01-02'),
+(27, 'Banana', 'Man', '60987103922', '1991-01-24');
 
 -- --------------------------------------------------------
 
@@ -146,7 +195,13 @@ CREATE TABLE `Prescription` (
 --
 
 INSERT INTO `Prescription` (`id`, `clienteleId`, `dateOfIssue`) VALUES
-(1, 1, '2017-05-28 15:48:49');
+(9, 27, '2017-06-02 22:19:03'),
+(11, 21, '2017-06-02 22:23:08'),
+(12, 16, '2017-06-04 12:12:08'),
+(17, 16, '2017-06-04 13:15:30'),
+(18, 15, '2017-06-04 16:30:38'),
+(19, 37, '2017-06-04 16:31:44'),
+(20, 38, '2017-06-04 16:36:12');
 
 -- --------------------------------------------------------
 
@@ -156,17 +211,31 @@ INSERT INTO `Prescription` (`id`, `clienteleId`, `dateOfIssue`) VALUES
 
 CREATE TABLE `Therapy` (
   `prescriptionId` int(11) NOT NULL,
-  `drugCode` char(10) NOT NULL
+  `drugCode` char(10) NOT NULL,
+  `dosage` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Therapy`
 --
 
-INSERT INTO `Therapy` (`prescriptionId`, `drugCode`) VALUES
-(1, '3919073564'),
-(1, '7039438769'),
-(1, '8474135348');
+INSERT INTO `Therapy` (`prescriptionId`, `drugCode`, `dosage`) VALUES
+(9, '3919073514', ''),
+(9, '3919073564', ''),
+(9, '3919073568', ''),
+(9, '4322342343', ''),
+(9, '5919073522', ''),
+(11, '4322341512', 'Bingo/day'),
+(11, '5919073522', 'trivia/week'),
+(12, '3919073564', ''),
+(12, '4322342343', ''),
+(17, '3919073564', ''),
+(18, '3919073522', ''),
+(18, '5919073522', 'Bilbbbo/month'),
+(19, '4322341512', ''),
+(19, '5919073567', ''),
+(20, '3919073568', '3moons/day'),
+(20, '4322342343', '5pills/week');
 
 --
 -- Indexes for dumped tables
@@ -183,7 +252,8 @@ ALTER TABLE `Admin`
 --
 ALTER TABLE `Clientele`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `doctorId` (`doctorId`,`patientId`),
+  ADD UNIQUE KEY `doctorId_2` (`doctorId`,`patientId`),
+  ADD KEY `doctorId` (`doctorId`),
   ADD KEY `patientId` (`patientId`);
 
 --
@@ -197,15 +267,14 @@ ALTER TABLE `Doctor`
 -- Indexes for table `Drug`
 --
 ALTER TABLE `Drug`
-  ADD PRIMARY KEY (`code`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `code` (`code`);
 
 --
 -- Indexes for table `Patient`
 --
 ALTER TABLE `Patient`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `amka` (`amka`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Prescription`
@@ -234,22 +303,22 @@ ALTER TABLE `Admin`
 -- AUTO_INCREMENT for table `Clientele`
 --
 ALTER TABLE `Clientele`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `Doctor`
 --
 ALTER TABLE `Doctor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `Patient`
 --
 ALTER TABLE `Patient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `Prescription`
 --
 ALTER TABLE `Prescription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- Constraints for dumped tables
 --
