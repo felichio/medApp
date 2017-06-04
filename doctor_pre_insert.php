@@ -3,7 +3,7 @@
     require_once("functions/functions.php");
 
     session_start();
-
+    checkLock();
     $user = $_SESSION["user"];
     $amka = filterInput($_POST["amka"]);
     $drugCodes = $_POST["drugcheck"];

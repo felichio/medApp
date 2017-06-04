@@ -3,7 +3,7 @@
     require_once("functions/functions.php");
 
     session_start();
-
+    checkLock();
     if (isAuthenticated() && getLoggedUser() instanceof Doctor) {
         $title = "Doctor";
         $cssName = "doctor";

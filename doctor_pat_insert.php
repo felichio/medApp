@@ -3,6 +3,7 @@
     require_once("functions/functions.php");
 
     session_start();
+    checkLock();
     $user = $_SESSION["user"];
     $firstname = filterInput($_POST["firstname"]);
     $lastname = filterInput($_POST["lastname"]);

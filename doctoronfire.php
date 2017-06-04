@@ -3,7 +3,7 @@
     require_once("functions/functions.php");
 
     session_start();
-
+    checkLock();
     if (isAuthenticated() && (getLoggedUser() instanceof Doctor)) {
         if (isset($_GET["patient_edt"])) {
             $id = $_GET["patient_edt"];

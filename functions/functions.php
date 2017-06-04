@@ -600,5 +600,9 @@
         return $data;
     }
 
+    function checkLock() {
+        if (!isAuthenticated()) return exit("This won't happen");
+    }
+
 
  ?>
