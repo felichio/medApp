@@ -212,6 +212,28 @@
 
     }
 
+    function getPrescriptionsAssociatedWithDoctor($doctor, $patientAmka, $drugCode, $date, $strict) {
+        $prescriptions = [];
+        global $mysqli;
+
+        if ($strict) {
+            $query = "select pr.id as id, p.lastname as plastname, left(p.firstname, 1) as pfirstname, pr.dateOfIssue as date, dr.code as code from Patient p, Clientele c, Prescription pr, Therapy t, Drug dr where pr.clienteleId = c.id and c.doctorId = ? and c.patientId = p.id and t.prescriptionId = pr.id and t.drugCode = dr.code and (p.amka = ? and dr.code = ? and ? = (select date_format(pr.dateOfIssue, '%Y-%m-%d')))";
+        } else {
+            $query = "select pr.id as id, p.lastname as plastname, left(p.firstname, 1) as pfirstname, pr.dateOfIssue as date, dr.code as code from Patient p, Clientele c, Prescription pr, Therapy t, Drug dr where pr.clienteleId = c.id and c.doctorId = ? and c.patientId = p.id and t.prescriptionId = pr.id and t.drugCode = dr.code and (p.amka = ? or dr.code = ? or ? = (select date_format(pr.dateOfIssue, '%Y-%m-%d')))";
+        }
+
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("isss", $doctor->getId(), $patientAmka, $drugCode, $date);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $prescriptions[] = ["id" => $row["id"], "pname" => $row["plastname"] . " " . $row["pfirstname"] . ".", "date" => $row["date"], "code" => $row["code"]];
+        }
+
+
+        return $prescriptions;
+    }
+
     function getDrugsByPrescriptionId($id) {
         $drugs = [];
         global $mysqli;

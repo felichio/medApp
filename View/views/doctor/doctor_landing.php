@@ -125,11 +125,11 @@
     </div>
     <div class="mypanel">
         <div>
-            <form class="form-horizontal search-form" action="" method="POST">
+            <form class="form-horizontal search-form" action="doctoronfire.php" method="POST">
                   <div class="form-group">
                     <label for="patient-in" class="col-sm-2 col-sm-offset-2 control-label">Patient's AMKA</label>
                     <div class="col-sm-5">
-                      <input type="text" class="form-control" id="patient-in" placeholder="AMKA" name="patient-in" list="patients">
+                      <input type="text" class="form-control" id="patient-in" placeholder="AMKA" name="patient-in" list="amkas">
                     </div>
                   </div>
                   <div class="form-group">
@@ -163,7 +163,7 @@
                     <div class="form-group">
                       <label for="patient-in" class="col-sm-2 col-sm-offset-2 control-label">Drug Name</label>
                       <div class="col-sm-5">
-                        <input type="text" class="form-control" id="drug-name" placeholder="Name" name="patient-in" list="patients">
+                        <input type="text" class="form-control" id="drug-name" placeholder="Name" name="drug-in" list="drugs-names">
                       </div>
                     </div>
                     <div class="form-group">
@@ -227,6 +227,30 @@
           }
           ?>
       </div>
+      <datalist id="amkas">
+          <?php
+
+                $amkas = getPatientAmkasByDoctor($user);
+
+                array_walk($amkas, function ($amka, $key) {
+                    echo "<option value=" . "'" . $amka . "'>";
+                });
+           ?>
+      </datalist>
+      <datalist id="drugs">
+          <?php
+                array_walk($drugs, function ($drug, $key) {
+                    echo "<option value=" . "'" . $drug->getCode() . "'>";
+                });
+           ?>
+      </datalist>
+      <datalist id="drugs-names">
+          <?php
+                array_walk($drugs, function ($drug, $key) {
+                    echo "<option value=" . "'" . $drug->getName() . "'>";
+                });
+           ?>
+      </datalist>
 
 
 

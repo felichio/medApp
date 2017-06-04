@@ -13,6 +13,9 @@
     if (checkPatientsAmkaByDoctor($user, $amka)) {
         $errors[] = "AMKA does not have patient association";
     }
+    if ($drugCodes === NULL) {
+        $errors[] = "Select at least one Drug";
+    }
 
     if (count($errors) > 0) {
         $_SESSION["errors"] = $errors;
@@ -22,7 +25,7 @@
         $id = getIdOfClienteleAssociatedWithDoctorAmka($user, $amka);
 
         insertPrescriptionAssociatedWithClienteleId($id);
-        
+
         array_walk($drugCodes, function ($code, $key) {
             $dosage = filterInput($_POST[$code]);
             insertDrugsAssociationsIntoTherapy($code, $dosage);

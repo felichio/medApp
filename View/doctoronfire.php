@@ -55,6 +55,26 @@
             $successes = ["Prescription deleted successfully"];
             $_SESSION["successes"] = $successes;
             redirect("View/doctor.php");
+        } else if (isset($_POST["patient-in"]) || isset($_POST["predrug-code"]) || isset($_POST["date-in"])) {
+            $patientAmka = $_POST["patient-in"];
+            $drugCode = $_POST["predrug-code"];
+            $date = $_POST["date-in"];
+            $strict = $_POST["strict"];
+            $user = $_SESSION["user"];
+            $prescriptions = getPrescriptionsAssociatedWithDoctor($user, $patientAmka, $drugCode, $date, $strict);
+            $_SESSION["selectedTab"] = 4;
+
+            if (count($prescriptions) > 0 ) {
+                $title = "Show Prescriptions";
+                $cssName = "doctor-presearch";
+                $jsName = "doctor-presearch";
+                render("views/doctor/prescriptions_show.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName, "prescriptions" => $prescriptions]);
+                
+            } else {
+                $errors = ["No results found"];
+                $_SESSION["errors"] = $errors;
+                redirect("View/doctor.php");
+            }
         }
 
     }
