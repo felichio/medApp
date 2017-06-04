@@ -32,7 +32,7 @@
     ?>
         <div class="panel panel-warning">
             <div class="panel-heading">
-                <h5>Prescription #<?= $prescription["id"]?></h5>
+                <h5>Prescription #<?= ++$key ?></h5>
             </div>
             <div class="panel-body">
                 <table class="table table-hover prescriptions-table">
