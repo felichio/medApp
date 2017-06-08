@@ -70,8 +70,7 @@
             $patientAmka = $_POST["patient-in"];
             $drugCode = $_POST["drug-code"];
             $date = $_POST["date-in"];
-            $strict = $_POST["strict"];
-
+            $strict = isset($_POST["strict"]) ? $_POST["strict"] : "";
             $prescriptions = getPrescriptionsByParameters($doctorAmka, $patientAmka, $drugCode, $date, $strict);
             $_SESSION["selectedTab"] = 5;
             if (count($prescriptions) > 0 ) {

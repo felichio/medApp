@@ -59,7 +59,7 @@
             $patientAmka = $_POST["patient-in"];
             $drugCode = $_POST["predrug-code"];
             $date = $_POST["date-in"];
-            $strict = $_POST["strict"];
+            $strict = isset($_POST["strict"]) ? $_POST["strict"] : "";
             $user = $_SESSION["user"];
             $prescriptions = getPrescriptionsAssociatedWithDoctor($user, $patientAmka, $drugCode, $date, $strict);
             $_SESSION["selectedTab"] = 4;
@@ -78,7 +78,7 @@
             $name = $_POST["drug-in"];
             $code = $_POST["drug-code"];
             $price = $_POST["price-in"];
-            $strict = $_POST["strict"];
+            $strict = isset($_POST["strict"]) ? $_POST["strict"] : "";
 
             $drugs = getDrugsAssociatedWithAttributes($code, $name, $price, $strict);
             $_SESSION["selectedTab"] = 5;

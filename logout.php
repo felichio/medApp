@@ -1,7 +1,8 @@
 <?php
+
+	require_once("functions/functions.php");
     session_start();
     session_destroy();
-
-    header("Location: " . "http://" . $_SERVER["HTTP_HOST"] . "/medWorld/index.php");
+	redirect("index.php");
 
  ?>

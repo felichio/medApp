@@ -579,7 +579,7 @@
     }
 
     function redirect($url) {
-        header("Location: " . "http://" . $_SERVER["HTTP_HOST"] . "/medWorld/" . $url);
+        header("Location: " . "http://" . $_SERVER["HTTP_HOST"] . "/medApp/" . $url);
     }
 
     function render($url, $data) {
