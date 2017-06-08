@@ -46,7 +46,7 @@
                             echo "<td>" . $doctor->getUsername() ."</td>";
                             echo "<td>" . $doctor->getEmail() ."</td>";
                             echo "<td>" . $doctor->getPassword() ."</td>";
-                            echo "<td><a href='adminonfire.php?doctor_edt=" . $doctor->getId() . "'><i class='fa fa-cogs'></i></a><a href='adminonfire.php?doctor_del=". $doctor->getId() ."'><i class='fa fa-ban'></i></a></td>";
+                            echo "<td><a title='Edit Doctor' href='adminonfire.php?doctor_edt=" . $doctor->getId() . "'><i class='fa fa-cogs'></i></a><a title='Delete Doctor' href='adminonfire.php?doctor_del=". $doctor->getId() ."'><i class='fa fa-ban'></i></a></td>";
                             echo "</tr>";
                         });
                     ?>
@@ -145,7 +145,7 @@
                             echo "<td>" . $drug->getName() ."</td>";
                             echo "<td>" . $drug->getDosage() ."</td>";
                             echo "<td>" . $drug->getPrice() ."$</td>";
-                            echo "<td><a href='adminonfire.php?drug_edt=" . $drug->getCode() . "'><i class='fa fa-cogs'></i></a><a href='adminonfire.php?drug_del=". $drug->getCode() ."'><i class='fa fa-ban'></i></a></td>";
+                            echo "<td><a title='Edit Drug' href='adminonfire.php?drug_edt=" . $drug->getCode() . "'><i class='fa fa-cogs'></i></a><a title='Delete Drug' href='adminonfire.php?drug_del=". $drug->getCode() ."'><i class='fa fa-ban'></i></a></td>";
                             echo "</tr>";
                         });
                      ?>

@@ -41,7 +41,7 @@
                             echo "<td>" . $patient->getAmka() . "</td>";
                             echo "<td>" . getNumberOfPrescriptionsByDoctorPatient($user, $patient) . "</td>";
                             echo "<td>" . $patient->getDateOfBirth() . "</td>";
-                            echo "<td><a href='doctoronfire.php?patient_edt=" . $patient->getId() . "'><i class='fa fa-cogs'></i></a><a href='doctoronfire.php?patient_del=". $patient->getId() ."'><i class='fa fa-ban'></i></a></td>";
+                            echo "<td><a title='Edit Patient' href='doctoronfire.php?patient_edt=" . $patient->getId() . "'><i class='fa fa-cogs'></i></a><a title='Delete Patient' href='doctoronfire.php?patient_del=". $patient->getId() ."'><i class='fa fa-ban'></i></a></td>";
                             echo "</tr>";
                         });
                      ?>
@@ -83,7 +83,7 @@
                                 });
                             echo "</td>";
                             echo "<td>" . $prescription["dateOfIssue"] ."</td>";
-                            echo "<td class='centercolumn'><a href='doctoronfire.php?prescription_del=". $prescription["id"] ."'><i class='fa fa-ban'></i></a></td>";
+                            echo "<td class='centercolumn'><a title='Delete Prescription' href='doctoronfire.php?prescription_del=". $prescription["id"] ."'><i class='fa fa-ban'></i></a></td>";
                             echo "</tr>";
                         });
 
