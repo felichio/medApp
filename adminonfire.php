@@ -65,6 +65,12 @@
             }
 
             redirect("admin.php");
+        } else if (isset($_GET["change_pass"])) {
+            $title = "Change Password";
+            $cssName = "change-pass";
+            $jsName = "change-pass";
+            render("views/change_pass.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName]);
+
         } else if (isset($_POST["doctor-in"]) || isset($_POST["patient-in"]) || isset($_POST["drug-code"]) || isset($_POST["date-in"])) {
             $doctorAmka = $_POST["doctor-in"];
             $patientAmka = $_POST["patient-in"];

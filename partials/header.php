@@ -27,8 +27,9 @@
                     <?php
                         if(isAuthenticated()) {
                             $user = getLoggedUser();
+                            $ch_pass = ($user instanceof Admin) ? "adminonfire.php?change_pass" : "doctoronfire.php?change_pass";
                         ?>
-                            Signed-In as: <a href=""><?= $user->getUsername() ?></a>
+                            Signed-In as: <a href="<?= $ch_pass ?>"><?= $user->getUsername() ?></a>
                             <a href="logout.php">Sing Out</a>
                     <?php      } else {  ?>
 

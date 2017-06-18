@@ -39,6 +39,12 @@
             $_SESSION["selectedTab"] = 1;
             render("views/doctor/patient_create.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName]);
 
+        } else if (isset($_GET["change_pass"])) {
+            $title = "Change Password";
+            $cssName = "change-pass";
+            $jsName = "change-pass";
+            render("views/change_pass.php", ["title" => $title, "cssName" => $cssName, "jsName" => $jsName]);
+
         } else if (isset($_GET["prescription_crt"])) {
 
             $title = "Create Prescription";

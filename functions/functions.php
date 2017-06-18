@@ -38,6 +38,16 @@
         return $stmt->affected_rows;
     }
 
+    function updatePassword($user, $password) {
+        global $mysqli;
+        $table = ($user instanceof Admin) ? "Admin" : "Doctor";
+        $query = "update $table set password = SHA1(?) where id = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("si", $password, $user->getId());
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
     function getNumberOf($table) {
         global $mysqli;
 
