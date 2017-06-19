@@ -53,11 +53,11 @@
                 </div>
               </div>
 
-              
+
 
               <div class="form-group">
                 <div class="col-sm-offset-4 col-sm-10">
-                  <button type="submit" class="btn btn-primary" id="savebutton">Submit</button>
+                  <button type="submit" class="btn btn-primary" id="savebutton">Register</button>
                   <button type="button" class="btn btn-warning" id="cancelbutton">Cancel</button>
                 </div>
               </div>
